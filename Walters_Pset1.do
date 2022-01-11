@@ -8,6 +8,12 @@ rename v5 highschool
 rename v6 female
 rename v7 age
 rename v8 childrenunder6
+rename v9 single
+drop v1
+summarize
+
+** Table of Summary Statistics
+
 
 ** 2. Create histograms for earning variables
 histogram year1earnings
