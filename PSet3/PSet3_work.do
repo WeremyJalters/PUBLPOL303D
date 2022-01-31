@@ -1,4 +1,5 @@
 
+import delimited "/Users/jeremywalters/Documents/GitHub/PUBLPOL303D/PSet3/lottery.txt", delimiter(space, collapse) 
 ** missing labels for #1
 drop v1
 rename v2 earn
@@ -9,11 +10,19 @@ rename v6 male
 rename v7 educ
 rename v8 tixbot
 rename v9 workthen
+label variable earn "Money earned after winning lotto"
+label variable prize "Amount of lotto prize money won"
+label variable lagged_earn "Earning 6 years prior to lotto win"
+label variable age "age in years"
+label variable male "indicator for being male"
+label variable educ "years of education in years"
+label variable tixbot "number of tix bought per week"
+label variable workthen "an indicator for working when tix were bought"
 
 ** #2
 gen winner=1
 replace winner=0 if prize==0
-
+label variable winner "indicator for winning the lotto"
 
 **3
 regress earn prize
@@ -46,7 +55,13 @@ reg lagg prize
  we should move toward zero values.
  */
  
- /**6. 
- If we're looking  at the effect of winning the lottery on future earnings,
- then it might be useful to eliminate non-winners from the data set.
+ /**6. */
+ 
+ tab winner
+drop if winner==0
+tab winner
+
+gen senior =0
+replace senior=1 if age>=60
+drop if senior==1
  
