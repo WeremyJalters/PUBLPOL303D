@@ -9,6 +9,9 @@ rename v8 kww
 rename v9 iq
 drop v1
 
+Hist educ
+
+
 /** 1. This distribution doesn't look normal, it peaks around 12, which marks
 high school graduation. The most likely value are 12(high school graduation)
 and 16(college graduation).**/
@@ -58,5 +61,8 @@ for 16 years in the output of the T-test. The difference between them is
 to an increase in salary of (.0652). If I multiply the coefficient by 4, I get 
 .2606, which is relatively close to the value from the T-test, when considering
 the Standard Error of the difference.
+**/
+
+/**
 
 
