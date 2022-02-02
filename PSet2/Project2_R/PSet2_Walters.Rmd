@@ -1,0 +1,52 @@
+---
+title: "PSet 2 R Version"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r install packages, include=FALSE}
+library(tidyverse)
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+library(binsreg)
+```
+
+```{r Import Data, echo=FALSE}
+df <- read.table("~/Documents/GitHub/PUBLPOL303D/PSet2/nls_2021.txt", quote="\"", comment.char="")
+```
+
+```{r rename variables}
+df <- rename(df,luwe=V1,educ=V2,exper=V3,age=V4,fed=V5,med=V6,kww=V7,iq=V8)
+```
+```{r Q1 Histogram}
+Education <- df$educ
+hist(Education)
+```
+This distribution does not look normal. There are peaks at 12 and 16 years of education which is not a surprise, as the conclusion of high school and the conclusion of undergraduate college are two common end points for students.
+
+```{r Q2 Ttest}
+df2 = df %>% mutate(eduband = case_when(educ== 16~1,
+                                        educ==12~0))
+t.test(df2$educ==16,df2$educ==12)
+
+
+
+```
+```{r Q3 scatter}
+ggplot(df,aes(x=educ,y=luwe)) + geom_point() +
+ labs(title = "Effect of Education on Log Earnings",
+      x ="Years of Education", y=" Log Weekly Wage")
+
+```
+It's challenging to learn much from this plot, as it is challenging to see the accurate density of points at different wage levels. It does appear that earning potential may increase along with years of education
+
+```{r Q4 bin scatter}
+binsreg(df2$luwe,df2$educ)
+```
+
